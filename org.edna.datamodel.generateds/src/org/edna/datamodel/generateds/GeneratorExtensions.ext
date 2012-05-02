@@ -72,6 +72,19 @@ List[ComplexType] getAllBaseDefinitions(ComplexType ct, List[ComplexType] list):
 Model getModel(emf::EObject ctx):
 	(Model)ctx.eRootContainer;
 
+String pythonTypeName (ElementDeclaration e) :
+	e.ref == null ?
+		switch (e.type.toString()) {
+			case "string" : "str"
+			case "double" : "float"
+			case "integer" : "int"
+			case "boolean" : "bool"
+			default : e.type.toString()
+		}
+	:
+		e.ref.name
+	;
+
 String typeName (ElementDeclaration e) :
 	e.ref!=null ? e.ref.name : e.type.toString();
 
