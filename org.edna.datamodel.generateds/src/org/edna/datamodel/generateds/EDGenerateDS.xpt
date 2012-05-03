@@ -103,18 +103,17 @@ def showIndent(outfile, level):
 
 
 def checkType(_strClassName, _strMethodName, _value, _strExpectedType):
-    if _strExpectedType not in (_value.__class__.__name__,)+(_value.__class__.__bases__):
-        if _value != None:
-            if _value.__class__.__name__ != _strExpectedType:
-                if (_value.__class__.__name__ == "unicode") and (_strExpectedType == "str"):
-                    # Accept unicode as expected str
-                    return
-                elif (_value.__class__.__name__ == "int") and (_strExpectedType in ["float", "double"]):
-                    # Accept int as expected double or float
-                    return
-                else:
-                    strMessage = "ERROR! %s.%s argument is not %s but %s" % (_strClassName, _strMethodName, _strExpectedType, _value.__class__.__name__)
-                    print(strMessage)
+    if _value != None:
+        if _strExpectedType not in (_value.__class__.__name__,)+(_value.__class__.__bases__):
+            if (_value.__class__.__name__ == "unicode") and (_strExpectedType == "str"):
+                # Accept unicode as expected str
+                return
+            elif (_value.__class__.__name__ == "int") and (_strExpectedType in ["float", "double"]):
+                # Accept int as expected double or float
+                return
+            else:
+                strMessage = "ERROR! %s.%s argument is not %s but %s" % (_strClassName, _strMethodName, _strExpectedType, _value.__class__.__name__)
+                print(strMessage)
 
 
 def warnEmptyAttribute(_strName, _strTypeName):
