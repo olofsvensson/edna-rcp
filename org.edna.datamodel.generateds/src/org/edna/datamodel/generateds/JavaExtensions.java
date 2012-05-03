@@ -62,7 +62,15 @@ public class JavaExtensions {
 		final URI resourceURI = obj.eResource().getURI();
 		final String[] resourceList = resourceURI.segments();
 		String resource = resourceList[2];
-		for (int i=3; i < resourceList.length-1; i++) {
+		int iStart = 3;
+		// Remove all entries till "edna"
+		for (int i=0; i < resourceList.length-1; i++) {
+			if (resourceList[i].equals("edna")) {
+				resource = resourceList[i+1];
+				iStart = i+2;
+			}
+		}
+		for (int i=iStart; i < resourceList.length-1; i++) {
 			resource += "/"+resourceList[i];
 		}
 		return resource;
